@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pandas
+openpyxl
+matplotlib
+seaborn
+crewai
+python-dotenv
+litellm
+tenacity

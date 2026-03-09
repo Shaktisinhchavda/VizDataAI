@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VizData AI — Intelligent Spreadsheet Analysis</title>
+    <meta name="description"
+        content="AI-powered spreadsheet with intelligent agents for data manipulation and analytics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ═══ HOME SCREEN ═══ -->
+    <div class="home-screen" id="homeScreen">
+        <header class="home-header">
+            <div class="header-brand">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect x="2" y="2" width="28" height="28" rx="6" stroke="url(#grad)" stroke-width="2.5" />
+                        <path d="M9 16h4l2-5 3 10 2-5h3" stroke="url(#grad)" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <defs>
+                            <linearGradient id="grad" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#dc2626" />
+                                <stop offset="1" stop-color="#ea580c" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h1 class="header-title">VizData <span class="accent-text">AI</span></h1>
+            </div>
+        </header>
+        <div class="home-body">
+            <div class="home-hero">
+                <div class="home-logo-glow">
+                    <svg width="56" height="56" viewBox="0 0 32 32" fill="none">
+                        <rect x="2" y="2" width="28" height="28" rx="6" stroke="url(#grad2)" stroke-width="2" />
+                        <path d="M9 16h4l2-5 3 10 2-5h3" stroke="url(#grad2)" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <defs>
+                            <linearGradient id="grad2" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#dc2626" />
+                                <stop offset="1" stop-color="#ea580c" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h2 class="home-title">What would you like to do?</h2>
+                <p class="home-subtitle">Choose how you want to get started with your data</p>
+            </div>
+            <div class="home-cards">
+                <div class="home-card" id="cardUpload">
+                    <div class="card-icon upload-icon-card">
+                        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 32V16m0 0l-6 6m6-6l6 6" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8 32v4a4 4 0 004 4h24a4 4 0 004-4v-4" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Upload Spreadsheet</h3>
+                    <p class="card-desc">Import an existing CSV or XLSX file and analyze it with AI agents</p>
+                    <div class="card-tags"><span class="tag">CSV</span><span class="tag">XLSX</span><span
+                            class="tag">Drag & Drop</span></div>
+                    <label class="card-btn" for="fileInput">Browse Files<input type="file" id="fileInput"
+                            accept=".csv,.xlsx,.xls" hidden></label>
+                </div>
+                <div class="home-card" id="cardCreate">
+                    <div class="card-icon create-icon-card">
+                        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 8v32M8 24h32" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" />
+                            <path d="M14 14l4 4M30 14l-4 4M14 34l4-4M30 34l-4-4" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" opacity="0.5" />
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Create with AI</h3>
+                    <p class="card-desc">Start from scratch — tell the AI bot what dataset you need and it will build it
+                    </p>
+                    <div class="card-tags"><span class="tag">AI Powered</span><span class="tag">From Scratch</span><span
+                            class="tag">Custom</span></div>
+                    <button class="card-btn" id="createBtn">Create Dataset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ CREATE MODAL ═══ -->
+    <div class="create-modal hidden" id="createModal">
+        <div class="create-modal-overlay" id="createOverlay"></div>
+        <div class="create-modal-content">
+            <h3 class="create-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M12 5v14M5 12h14" />
+                </svg>Create New Dataset</h3>
+            <div class="create-field"><label for="datasetName">Dataset Name</label><input type="text" id="datasetName"
+                    placeholder="e.g. sales_data" autocomplete="off"></div>
+            <div class="create-field"><label for="datasetColumns">Columns <span class="optional">(optional,
+                        comma-separated)</span></label><input type="text" id="datasetColumns"
+                    placeholder="e.g. Name, Age, City, Salary" autocomplete="off"></div>
+            <p class="create-hint">💡 You can also skip columns — just tell the Data Manager bot to add them later!</p>
+            <div class="create-actions"><button class="create-cancel" id="createCancel">Cancel</button><button
+                    class="create-confirm" id="createConfirm">Create & Start</button></div>
+        </div>
+    </div>
+
+    <!-- ═══ SPREADSHEET APP (Google Sheets-like) ═══ -->
+    <div class="sheets-app hidden" id="sheetsApp">
+
+        <!-- Menu Bar -->
+        <div class="sheets-menubar">
+            <div class="menu-left">
+                <div class="sheets-logo" id="goHome" title="Back to Home">
+                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                        <rect x="2" y="2" width="28" height="28" rx="6" stroke="url(#grad3)" stroke-width="2" />
+                        <path d="M9 16h4l2-5 3 10 2-5h3" stroke="url(#grad3)" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <defs>
+                            <linearGradient id="grad3" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#dc2626" />
+                                <stop offset="1" stop-color="#ea580c" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="sheet-name-area">
+                    <span class="sheet-filename" id="sheetFilename">Untitled</span>
+                </div>
+                <div class="menu-items">
+                    <div class="dropdown">
+                        <span class="menu-item">File</span>
+                        <div class="dropdown-content">
+                            <a href="#" id="menuDownload">Download CSV</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" id="menuHomeLink">Back to Home</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <span class="menu-item">Edit</span>
+                        <div class="dropdown-content">
+                            <a href="#" id="menuClearCell">Clear Selected Cell</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <span class="menu-item">View</span>
+                        <div class="dropdown-content">
+                            <a href="#" id="menuToggleChat">Toggle Chat Sidebar</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <span class="menu-item">Insert</span>
+                        <div class="dropdown-content">
+                            <a href="#" id="menuAddRow">Ask AI to Add Row</a>
+                            <a href="#" id="menuAddCol">Ask AI to Add Column</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-right">
+                <button class="sidebar-toggle" id="sidebarToggle" title="Toggle AI Chat">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                    </svg>
+                    <span>Chat</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="sheets-toolbar">
+            <div class="cell-ref-box" id="cellRef">A1</div>
+            <div class="toolbar-divider"></div>
+            <div class="formula-bar" id="formulaBar">
+                <span class="fx-label">fx</span>
+                <input type="text" class="formula-input" id="formulaInput" readonly placeholder="Select a cell">
+            </div>
+        </div>
+
+        <!-- Main area: sidebar + grid -->
+        <div class="sheets-main">
+
+            <!-- AI Chat Sidebar -->
+            <aside class="chat-sidebar open" id="chatSidebar">
+                <div class="sidebar-header">
+                    <h3 class="sidebar-title">Chat</h3>
+                    <span class="sidebar-label">Experimental</span>
+                    <div class="sidebar-actions">
+                        <button class="sb-icon" id="sidebarClose" title="Close">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M18 6L6 18M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bot Tabs -->
+                <div class="bot-tabs">
+                    <button class="bot-tab active" data-bot="data" id="tabData">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M3 9h18M9 3v18" />
+                        </svg>
+                        Data Manager
+                    </button>
+                    <button class="bot-tab" data-bot="analytics" id="tabAnalytics">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 20V10M12 20V4M6 20v-6" />
+                        </svg>
+                        Analytics
+                    </button>
+                </div>
+
+                <!-- Data Manager Chat -->
+                <div class="sidebar-chat active" id="dataChatPane">
+                    <div class="chat-messages" id="dataMessages">
+                        <div class="message bot-message">
+                            <div class="message-content">👋 Hi! I'm the <strong>Data Manager</strong>. I can add rows,
+                                columns, rename, filter, sort, and more. What would you like to do?</div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <div class="typing-indicator hidden" id="dataTyping"><span></span><span></span><span></span>
+                        </div>
+                        <form class="chat-form" id="dataForm">
+                            <input type="text" class="chat-input" id="dataInput" placeholder="Ask a question..."
+                                autocomplete="off">
+                            <button type="submit" class="send-btn" id="dataSend">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Analytics Chat -->
+                <div class="sidebar-chat" id="analyticsChatPane">
+                    <div class="chat-messages" id="analyticsMessages">
+                        <div class="message bot-message">
+                            <div class="message-content">📊 Hello! I'm the <strong>Analytics Agent</strong>. I can
+                                create charts, run stats, and generate insights. Ask me anything!</div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <div class="typing-indicator hidden" id="analyticsTyping">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <form class="chat-form" id="analyticsForm">
+                            <input type="text" class="chat-input" id="analyticsInput" placeholder="Ask a question..."
+                                autocomplete="off">
+                            <button type="submit" class="send-btn analytics-send-btn" id="analyticsSend">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Spreadsheet Grid -->
+            <div class="grid-area" id="gridArea">
+                <div class="grid-scroll" id="gridScroll">
+                    <table class="sheet-grid" id="sheetGrid">
+                        <thead id="gridHead"></thead>
+                        <tbody id="gridBody"></tbody>
+                    </table>
+                    <div class="empty-grid hidden" id="emptyGrid">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" opacity="0.2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M3 9h18M3 15h18M9 3v18" />
+                        </svg>
+                        <p>Empty spreadsheet — use the <strong>Data Manager</strong> to add data!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sheet Tabs (bottom) -->
+        <div class="sheets-footer">
+            <div class="sheet-tabs">
+                <button class="sheet-tab active" id="currentSheetTab">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <path d="M3 9h18M9 3v18" />
+                    </svg>
+                    <span id="sheetTabName">Sheet 1</span>
+                </button>
+            </div>
+            <div class="sheet-status">
+                <span id="sheetStatus">Ready</span>
+                <span class="status-divider">|</span>
+                <span id="sheetDims">0 rows × 0 cols</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart Modal -->
+    <div class="chart-modal hidden" id="chartModal">
+        <div class="chart-modal-overlay" id="chartOverlay"></div>
+        <div class="chart-modal-content">
+            <button class="chart-close" id="chartClose">&times;</button>
+            <img id="chartImage" src="" alt="Chart">
+        </div>
+    </div>
+
+    <!-- Drop Overlay -->
+    <div class="drop-overlay hidden" id="dropOverlay">
+        <div class="drop-content">
+            <h2>Drop your file here</h2>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p id="loadingText">Processing...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
