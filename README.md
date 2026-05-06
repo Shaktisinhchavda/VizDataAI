@@ -6,6 +6,8 @@
 [![Ollama](https://img.shields.io/badge/Local%20Models-Ollama-black.svg)](https://ollama.com/)
 [![Gemini](https://img.shields.io/badge/Cloud%20Fallback-Google%20Gemini-4285F4.svg)](https://aistudio.google.com/)
 
+🎥 **[Watch the Demo Video on Loom](https://www.loom.com/share/f0b141467ece49938b04f0dbe13f08c5)**
+
 **VizData AI** is a powerful analytical platform that integrates autonomous AI agents directly into an interactive spreadsheet interface. By leveraging **Local LLMs (Ollama)** and the **CrewAI** multi-agent framework, users can chat directly with their data—telling the AI to write Pandas scripts to generate test datasets, modify spreadsheets, or automatically plot deep analytical visualizations, all completely offline.
 
 ---
